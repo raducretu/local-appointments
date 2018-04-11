@@ -1,0 +1,437 @@
+@import '_breakpoints';
+
+$prefix: locapp;
+$color_light_gray: #F2F2F2;
+$color_dark_gray: #484848;
+$color_gray: #DDDFE6;
+$color_primary: #439BFF;
+$color_blue: #0D3EF2;
+
+$width_container: 1240px;
+
+#local-appointments{
+  overflow: hidden;
+}
+
+.toplevel_page_local-appointments{
+  background-color: #fff;
+
+  hr{
+    border-top: 2px solid #F2F2F2;
+  }
+  #wpcontent{
+    padding-left: 0;
+  }
+  .wrap{
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  a{
+    color: $color_blue;
+  }
+  h2{
+    font-size: 140%;
+  }
+}
+
+input[type=text].el-input__inner{
+  margin: 0;
+  box-shadow: none;
+}
+
+@import "_comp.locapp-navigation";
+@import '_element.ui';
+
+
+/* Buttons */
+.loc-app-btn{
+  background-color: black;
+  border-radius: 2px;
+  padding: 1em 2em;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+
+
+
+
+
+
+/* Content */
+.#{$prefix}{
+  &-content{
+    padding: 2rem;
+    max-width: $width_container;
+    margin: 0 auto;
+  }
+  &-header{
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    background-color: rgba(#fff, 0.95);
+    transform: all 120ms ease;
+
+    &.stuck{
+      position: fixed;
+      top: 30px;
+      right: 0;
+      left: 160px;
+      z-index: 5;
+    }
+
+    .el-row{
+      max-width: $width_container;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1{
+      margin: 0;
+      line-height: 1.75;
+      padding: 0;
+      font-size: 200%;
+    }
+
+    &::after{
+      content: '';
+      display: block;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-bottom: 1px solid $color_light_gray;
+      position: absolute;
+    }
+  }
+}
+
+/* Filters */
+.#{$prefix}__dashboard__filters{
+  border-bottom: 1px solid $color_light_gray;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  margin-top: -1.5rem;
+  text-align: center;
+}
+
+/* Bookings List */
+.#{$prefix}__dashboard__bookings{
+  &__day-title{
+    margin-bottom: 0;
+    margin-top: 4rem;
+  }
+}
+
+
+/* Edit Event Type */
+.#{$prefix}__form-edit-type{
+  //max-width: 600px;
+  //margin: 0 auto;
+
+  h2{
+    //border-bottom: 2px solid $color_light_gray
+  }
+}
+
+.app-wp__max{
+  &--large{
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  &--normal{
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+
+.el-form--label-top .el-form-item__label{
+  line-height: 1.5;
+}
+
+
+
+
+.app-wp__form-edit-type__duration-radio{
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+
+  .el-radio-button{
+    flex-grow: 1;
+
+    .el-radio-button__inner{
+      display: block;
+    }
+  }
+}
+
+.fa-circle{
+  position: relative;
+  cursor: pointer;
+
+  &::before{
+    border: 2px solid transparent;
+  }
+
+  &.selected{
+    &::before{
+      text-shadow: 0 0 7px currentColor;
+    }
+    &::after{
+      display: block;
+      content: "\f00c";
+      color: white;
+      font-size: 14px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.98;
+    }
+  }
+}
+
+
+
+/* Helpers */
+@import '_helpers';
+
+
+
+.preview{
+  background-color: $color_light_gray;
+  border: 1px solid $color_gray;
+  padding: 0 15px;
+  line-height: 38px;
+  font-size: 14px;
+
+  border-radius: 5px;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+
+  p{
+    margin: 5px 0 21px 0;
+    line-height: 21px;
+    font-size: 14px;
+  }
+}
+
+.el-form--inline .el-form-item{
+  margin-top: 1rem;
+}
+
+.#{$prefix}__modal-edit-availability{
+  max-width: 80%;
+
+  @include breakpoint(desktop) {
+    max-width: 40%;
+  }
+
+  @include breakpoint(large-desktop) {
+    max-width: 30%;
+  }
+
+  &__unavailable{
+    background-color: $color_light_gray;
+    width: 100%;
+    padding: 3rem 0;
+    border-radius: 2px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 110%;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    small{
+      display: block;
+      font-weight: 400;
+      font-size: 11px;
+      opacity: 0.6;
+      letter-spacing: 1;
+    }
+  }
+}
+
+
+
+.el-button--block{
+  display: block;
+  width: 100%;
+}
+.el-button--left{
+  text-align: left;
+
+  .fa{
+    margin-right: .5rem;
+  }
+}
+
+input[type=text].el-input__inner{
+  background-color: #fff;
+  width: 100%;
+}
+.el-select,
+.el-date-editor.el-input{
+  width: 100%;
+  display: block;
+}
+
+
+.#{$prefix}__label{
+  display: block;
+  line-height: 1.4;
+  padding-bottom: .5rem;
+  font-size: 110%;
+  font-weight: 500;
+}
+
+
+.el-switch{
+  input[type=checkbox]{
+    display: none;
+  }
+}
+
+
+.el-form--label-top .el-form-item__label{
+  display: block;
+}
+
+
+
+.#{$prefix}__additional__form-questions{
+  padding-top: 1rem;
+
+  &__label{
+    display: block;
+    line-height: 1.4;
+    padding-bottom: .75rem;
+    font-size: 110%;
+    font-weight: 500;
+  }
+
+  &__question{
+    position: relative;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    padding: 1rem 2rem 2rem;
+
+    &:hover{
+      background-color: $color_light_gray;
+      border-radius: 3px;
+    }
+
+    &--inactive{
+      opacity: 0.5;
+      background-color: $color_light_gray;
+    }
+
+
+    .fa-ellipsis-v{
+      position: absolute;
+      left: 0;
+      top: 1.15rem;
+      opacity: 0.2;
+      width: 2rem;
+      cursor: move;
+      text-align: center;
+    }
+    .fa-edit{
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: none;
+      cursor: pointer;
+    }
+
+    &:hover{
+      .fa-ellipsis-v{
+        opacity: 0.7;
+      }
+      .fa-edit{
+        display: block;
+      }
+    }
+  }
+
+  .el-button{
+    border-radius: 10000px;
+    padding: 0;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+}
+
+
+.#{$prefix}__preview-email{
+  h4{
+    margin-bottom: 0;
+    margin-top: 0;
+
+    small{
+      font-weight: normal;
+      font-weight: 300;
+      opacity: 0.5;
+      font-size: 11px;
+      margin-top: 5px;
+      display: inline-block;
+    }
+  }
+
+  &__subject{
+    p{
+      margin: 0;
+    }
+  }
+  &__avatar{
+    width: 60px;
+    height: 60px;
+    background-color: $color_gray;
+    color: white;
+    border-radius: 1000px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.35);
+    text-align: center;
+    line-height: 60px;
+    font-size: 150%;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .el-row{
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $color_light_gray;
+    border-top: 1px solid $color_light_gray;
+    padding-top: 1rem;
+  }
+}
+
+
+@import '_shortcode.services';
+@import '_comp.locapp-availability';
+
+
+.app-wp__link{
+  text-decoration: none;
+
+}
+
+
+.el-menu-item.is-disabled{
+  opacity: 1;
+  cursor: auto;
+}
+
+
+
+.locapp-info-icon{
+  opacity: 0.5;
+}

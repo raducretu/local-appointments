@@ -1,0 +1,124 @@
+.#{$prefix}-availability{
+  border-top: 1px solid $color_gray;
+  border-right: 1px solid $color_gray;
+  border-left: 1px solid $color_gray;
+  border-radius: 3px;
+  line-height: 1.5;
+  margin-left: -10rem;
+  margin-right: -10rem;
+  margin-top: 2rem;
+
+  &:hover{
+
+  }
+
+  &__week{
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+
+    &::before{
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid $color_gray;
+      z-index: 1;
+    }
+  }
+  &__day{
+    flex-basis: 14.2857142857%;
+    position: relative;
+    padding: .25rem .5rem .5rem;
+    box-sizing: border-box;
+    min-height: 5rem;
+    line-height: 1.4;
+
+    &:not(:last-child)::before{
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      border-left: 1px solid rgba(0,0,0,0.15);
+
+    }
+
+    &--selectable{
+      &:hover{
+        &::after{
+          content: '';
+          display: block;
+          position: absolute;
+          top: -1px;
+          right: 0;
+          bottom: 0;
+          left: -1px;
+          border: 2px solid $color_blue;
+          z-index: 2;
+          //box-shadow: 1rem 1rem 4rem rgba(0,0,0,0.1);
+        }
+      }
+    }
+
+    &--past{
+      background-color: rgba($color_light_gray, 0.5);
+    }
+
+    &--today{
+      background-color: #fcf8e5;
+    }
+
+    small{
+      opacity: 0.7;
+      font-size: 11px;
+      display: block;
+      margin-bottom: .25rem;
+      text-align: right;
+    }
+  }
+
+  &__slot{
+    font-size: 11px;
+    background-color: $color_blue;
+    color: white;
+    padding: .25rem .35rem;
+    border-radius: 2px;
+
+    span{
+      &:last-child{
+        float: right;
+      }
+    }
+
+    & + .#{$prefix}-availability__slot{
+      margin-top: 1px;
+    }
+  }
+
+  &__header{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+
+    &::after{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid $color_gray;
+      z-index: 1;
+    }
+
+    .#{$prefix}-availability__day{
+      min-height: inherit;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+    }
+  }
+}

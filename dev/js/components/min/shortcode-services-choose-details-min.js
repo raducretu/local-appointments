@@ -1,0 +1,1 @@
+Vue.component("local-appointmentsshortcode-services-choose-details",{props:["options","service","preview"],template:"#local-appointmentstemplate__component__shortcode-services-choose-details",data:function(){var e=this;return{loading:!1}},methods:{openDay:function(e){this.$emit("service-selected",e)}}});

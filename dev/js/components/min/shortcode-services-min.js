@@ -1,0 +1,1 @@
+Vue.component("local-appointmentsshortcode-services",{template:"#local-appointmentstemplate__component__shortcode-services",data:function(){var e=this;return{}}});

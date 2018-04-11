@@ -1,0 +1,105 @@
+.#{$prefix}-display{
+  &--block{
+    display: block;
+  }
+  &--inline-block{
+    display: inline-block;
+  }
+}
+
+
+
+$directions: ( top, right, bottom, left);
+
+.#{$prefix}-margin{
+  @each $direction in $directions{
+    &--#{$direction}-05{
+      margin-#{$direction}: 0.5rem / 2;
+
+      @include breakpoint(tablet) {
+        margin-#{$direction}: 0.5rem / 1.5;
+      }
+
+      @include breakpoint(desktop) {
+        margin-#{$direction}: 0.5rem;
+      }
+    }
+    @for $i from 1 through 10{
+      &--#{$direction}-#{$i}{
+        margin-#{$direction}: $i * 1rem / 2;
+
+        @include breakpoint(tablet) {
+    			margin-#{$direction}: $i * 1rem / 1.5;
+    		}
+
+    		@include breakpoint(desktop) {
+    			margin-#{$direction}: $i * 1rem;
+    		}
+      }
+    }
+  }
+}
+
+.#{$prefix}-padding{
+  @each $direction in $directions{
+    &--#{$direction}-05{
+      padding-#{$direction}: 0.5rem / 2;
+
+      @include breakpoint(tablet) {
+        padding-#{$direction}: 0.5rem / 1.5;
+      }
+
+      @include breakpoint(desktop) {
+        padding-#{$direction}: 0.5rem;
+      }
+    }
+    @for $i from 0 through 10{
+      &--#{$direction}-#{$i}{
+        padding-#{$direction}: $i * 1rem / 2;
+
+        @include breakpoint(tablet) {
+    			padding-#{$direction}: $i * 1rem / 1.5;
+    		}
+
+    		@include breakpoint(desktop) {
+    			padding-#{$direction}: $i * 1rem;
+    		}
+      }
+    }
+  }
+}
+
+
+
+.#{$prefix}-pull--right{
+  float: right !important;
+}
+.#{$prefix}-pull--left{
+  float: left !important;
+}
+
+
+.#{$prefix}-max{
+  @for $i from 1 through 50{
+    &--#{$i}{
+      max-width: $i * 1rem;
+    }
+  }
+}
+
+
+
+.#{$prefix}{
+  &-text--align-right{
+    text-align: right;
+  }
+  &-text--align-center{
+    text-align: center;
+  }
+  &-text--align-left{
+    text-align: left;
+  }
+  &-text--color-gray{
+    color: rgba( $color_dark_gray, 0.5 )
+  }
+}

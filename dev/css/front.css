@@ -1,0 +1,381 @@
+/* Local Appointments Services Shortcode */
+.loc-app-sc-services {
+  /*
+      &[data-preview="true"]:hover{
+        position: relative;
+
+        &::before{
+          content: '';
+          display: block;
+          border-radius: 2px;
+          border: 2px solid green;
+          opacity: 0.3;
+          top: -2vh;
+          right: -2vh;
+          bottom: -2vh;
+          left: -2vh;
+          position: absolute;
+        }
+      }
+      */ }
+  .loc-app-sc-services__services-list {
+    display: flex;
+    margin: -2rem -1rem 0;
+    flex-wrap: wrap;
+    box-sizing: border-box; }
+    @media (min-width: 992px) {
+      .loc-app-sc-services__services-list .loc-app-sc-services__service {
+        flex-basis: 100%; } }
+    @media (min-width: 992px) {
+      .loc-app-sc-services__services-list.columns--2 .loc-app-sc-services__service {
+        flex-basis: 50%; } }
+    @media (min-width: 992px) {
+      .loc-app-sc-services__services-list.columns--3 .loc-app-sc-services__service {
+        flex-basis: 33.33%; } }
+    @media (min-width: 992px) {
+      .loc-app-sc-services__services-list.columns--4 .loc-app-sc-services__service {
+        flex-basis: 25%; } }
+  .loc-app-sc-services__service {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    padding: 0 1em;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    margin-top: 2em; }
+    .loc-app-sc-services__service:hover {
+      z-index: 5; }
+    .loc-app-sc-services__service__duration {
+      display: inline-block;
+      padding: .1vh 1.5vh;
+      position: relative;
+      margin-right: .75vh;
+      font-size: .8em; }
+      .loc-app-sc-services__service__duration::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        border: 1px solid currentColor;
+        opacity: 0.1;
+        border-radius: 2px; }
+    .loc-app-sc-services__service__content {
+      box-shadow: 0 5px 3rem -1rem rgba(0, 0, 0, 0.1), 0 5px 1rem rgba(0, 0, 0, 0.05);
+      transition: all 120ms ease;
+      border-radius: 5px;
+      padding: 16px 60px 60px 60px;
+      flex-grow: 1;
+      background-color: white;
+      cursor: pointer;
+      position: relative;
+      box-sizing: border-box; }
+      .loc-app-sc-services__service__content::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: inherit;
+        border-radius: 100px;
+        left: 20px;
+        top: 20px;
+        box-sizing: border-box; }
+      .loc-app-sc-services__service__content p {
+        margin: 0 0 2vh 0;
+        opacity: 0.7; }
+    .loc-app-sc-services__service:hover .loc-app-sc-services__service__content {
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1), 0 3rem 3rem -1rem rgba(0, 0, 0, 0.1);
+      transform: translateY(-5%); }
+    .loc-app-sc-services__service h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 22px;
+      line-height: 1.2;
+      font-weight: bold; }
+
+/* Local Appointments Services Days Shortcode */
+.loc-app-sc-services__days-header {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center; }
+  .loc-app-sc-services__days-header > div {
+    flex-basis: 25%;
+    flex-grow: 1; }
+  .loc-app-sc-services__days-header:nth-child(2) {
+    flex-grow: 2;
+    text-align: center; }
+  .loc-app-sc-services__days-header > div:last-child {
+    text-align: right;
+    font-size: small; }
+  .loc-app-sc-services__days-header h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 160%; }
+  .loc-app-sc-services__days-header .fa {
+    margin-right: 1vh; }
+
+.loc-app-sc-services__days-filters {
+  width: 100%;
+  position: relative;
+  padding: 1em 0 2em;
+  font-size: 12px;
+  margin-bottom: 4vh;
+  margin-top: -3vh;
+  opacity: 0.8;
+  text-align: center; }
+  .loc-app-sc-services__days-filters::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0.12;
+    border-bottom: 1px solid;
+    z-index: -1; }
+  .loc-app-sc-services__days-filters__hours {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em; }
+  .loc-app-sc-services__days-filters__filter {
+    display: inline-block;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 0; }
+    .loc-app-sc-services__days-filters__filter--day + .loc-app-sc-services__days-filters__filter--day {
+      margin-left: 1em; }
+    .loc-app-sc-services__days-filters__filter input[type="radio"] {
+      margin-right: .5vh; }
+    .loc-app-sc-services__days-filters__filter--hour {
+      display: flex;
+      align-items: center; }
+      .loc-app-sc-services__days-filters__filter--hour select:not([size]):not([multiple]) {
+        margin-left: 1em;
+        font-size: 12px;
+        padding: .6em 2em .6em 1em;
+        height: auto;
+        border-radius: 2px; }
+      .loc-app-sc-services__days-filters__filter--hour + .loc-app-sc-services__days-filters__filter--hour {
+        margin-left: 1em; }
+
+.loc-app-sc-services__month {
+  flex-basis: 95%;
+  flex-shrink: 0;
+  flex-grow: 1;
+  padding: 1vh 0;
+  margin-bottom: 2vh;
+  overflow: hidden;
+  text-align: center;
+  box-sizing: border-box; }
+  .loc-app-sc-services__month h4 {
+    font-size: 120%;
+    opacity: 0.3;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box; }
+    .loc-app-sc-services__month h4::before, .loc-app-sc-services__month h4::after {
+      content: '';
+      display: inline-block;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      position: absolute;
+      width: 100rem; }
+    .loc-app-sc-services__month h4::after {
+      top: 50%;
+      margin-left: 1rem; }
+    .loc-app-sc-services__month h4::before {
+      right: 100%;
+      top: 50%;
+      margin-right: 1rem; }
+
+.loc-app-sc-services__days-list {
+  display: flex;
+  margin: 0 -1rem;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  justify-content: center; }
+  .loc-app-sc-services__days-list .loc-app-sc-services__day {
+    flex-basis: 50%; }
+    @media (min-width: 992px) {
+      .loc-app-sc-services__days-list .loc-app-sc-services__day {
+        flex-basis: 100%; } }
+  @media (min-width: 992px) {
+    .loc-app-sc-services__days-list.columns--2 .loc-app-sc-services__day {
+      flex-basis: 50%; } }
+  @media (min-width: 992px) {
+    .loc-app-sc-services__days-list.columns--3 .loc-app-sc-services__day {
+      flex-basis: 33.33%; } }
+  @media (min-width: 992px) {
+    .loc-app-sc-services__days-list.columns--4 .loc-app-sc-services__day {
+      flex-basis: 25%; } }
+  @media (min-width: 992px) {
+    .loc-app-sc-services__days-list.columns--5 .loc-app-sc-services__day {
+      flex-basis: 20%; } }
+
+.loc-app-sc-services__day {
+  padding: 0 .5rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  cursor: pointer; }
+  .loc-app-sc-services__day .fa-circle {
+    color: #33CB70; }
+  .loc-app-sc-services__day--unavailable {
+    color: #D1D6DD;
+    opacity: 0.7; }
+    .loc-app-sc-services__day--unavailable .fa-circle,
+    .loc-app-sc-services__day--unavailable .local-appointmentsshortcode-services__day-name {
+      color: #D1D6DD; }
+  .loc-app-sc-services__day-name {
+    color: #000;
+    font-weight: 500; }
+  .loc-app-sc-services__day-number {
+    font-size: 120%;
+    font-weight: 600;
+    float: right; }
+  .loc-app-sc-services__day__content {
+    box-shadow: 0.15rem 0.15rem 1rem -0.25rem rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 1rem;
+    transition: all 120ms ease; }
+  .loc-app-sc-services__day:hover .loc-app-sc-services__day__content {
+    box-shadow: 0 0.5rem 2rem -0.5rem rgba(0, 0, 0, 0.2);
+    transform: scale(1.05) translateY(-5%); }
+
+.loc-app-sc-services__days-footer {
+  margin-top: 3rem;
+  color: rgba(0, 0, 0, 0.4);
+  text-align: center; }
+  .loc-app-sc-services__days-footer a {
+    font-size: 110%;
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    background-color: #F2F2F2;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500; }
+
+/* Local Appointments Services Days Shortcode */
+.loc-app-sc-services__times-header {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center; }
+  .loc-app-sc-services__times-header > div {
+    flex-basis: 25%;
+    flex-grow: 1; }
+  .loc-app-sc-services__times-header:nth-child(2) {
+    flex-grow: 2;
+    text-align: center; }
+  .loc-app-sc-services__times-header > div:last-child {
+    text-align: right;
+    font-size: small; }
+  .loc-app-sc-services__times-header h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 160%; }
+    .loc-app-sc-services__times-header h3 small {
+      display: block;
+      text-align: center;
+      font-weight: bold;
+      font-size: 75%; }
+  .loc-app-sc-services__times-header .fa {
+    margin-right: 1vh; }
+
+.loc-app-sc-services__times-list {
+  display: flex;
+  margin: 0 -1rem;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  justify-content: center; }
+
+.loc-app-sc-services__time {
+  padding: 0 .5rem;
+  margin-bottom: 1rem;
+  flex-basis: 16.66%;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer; }
+  .loc-app-sc-services__time .fa-circle {
+    color: #33CB70; }
+  .loc-app-sc-services__time--unavailable {
+    color: #D1D6DD;
+    opacity: 0.7; }
+    .loc-app-sc-services__time--unavailable .fa-circle,
+    .loc-app-sc-services__time--unavailable .local-appointmentsshortcode-services__day-name {
+      color: #D1D6DD; }
+  .loc-app-sc-services__time--not-confirm {
+    opacity: 0.35;
+    filter: blur(1px); }
+  .loc-app-sc-services__time--confirm .loc-app-sc-services__time__content {
+    box-shadow: 0.15rem 0.15rem 2rem -0.25rem rgba(0, 0, 0, 0.3);
+    transform: scale(1.05) translateY(-5%); }
+  .loc-app-sc-services__time--confirm:hover .loc-app-sc-services__time__content {
+    box-shadow: 0.15rem 0.15rem 2rem -0.25rem rgba(0, 0, 0, 0.3) !important; }
+  .loc-app-sc-services__time-name {
+    color: #000;
+    font-weight: 500;
+    font-size: 110%;
+    float: right; }
+  .loc-app-sc-services__time__content {
+    box-shadow: 0.15rem 0.15rem 1rem -0.25rem rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 1rem;
+    transition: all 120ms ease; }
+  .loc-app-sc-services__time:hover .loc-app-sc-services__time__content {
+    box-shadow: 0 0.5rem 2rem -0.5rem rgba(0, 0, 0, 0.2);
+    transform: scale(1.05) translateY(-5%); }
+  .loc-app-sc-services__time__confirm {
+    left: .5rem;
+    right: .5rem;
+    top: 100%;
+    background-color: #fff;
+    position: absolute;
+    margin: 1rem 0 0;
+    border-radius: 5px;
+    display: block;
+    box-sizing: border-box;
+    z-index: 5; }
+    .loc-app-sc-services__time__confirm-button {
+      display: block;
+      background-color: red;
+      color: white;
+      border-radius: 3px;
+      text-align: center;
+      box-sizing: border-box;
+      padding: .75rem 0;
+      text-decoration: none;
+      font-weight: 600;
+      font-weight: 500; }
+      .loc-app-sc-services__time__confirm-button:hover {
+        color: white;
+        text-decoration: none; }
+      .loc-app-sc-services__time__confirm-button + .loc-app-sc-services__time__confirm-button {
+        margin-top: .75rem;
+        background-color: blue; }
+
+/* Local Appointments Services Days Shortcode */
+.loc-app-sc-services__details {
+  display: flex;
+  width: 100%; }
+  .loc-app-sc-services__details__summary {
+    flex-basis: 50%; }
+    .loc-app-sc-services__details__summary .fa {
+      margin-right: 1vh; }
+    .loc-app-sc-services__details__summary h3 small {
+      display: block;
+      margin-top: .5vh;
+      opacity: 0.5; }
+  .loc-app-sc-services__details__content {
+    flex-basis: 50%;
+    margin-left: 4rem; }

@@ -1,0 +1,373 @@
+/*
+      notifications: {
+        emails: {
+          confirmation: {
+            subject: 'Confirmed: {{event_name}} with {{team_member_name}} on {{event_date}}',
+            body: 'Hi {{invitee_full_name}},\n\nYour {{event_name}} with {{team_member_name}} at {{event_time}} on {{event_date}} is scheduled.\n\n{{event_description}}\n\n{{location}}\n\n{{questions_and_answers}}'
+          }
+        }
+      },
+      default_tab: 'first',
+      form_questions: [
+        {
+          type: 'text',
+          label: 'Full Name',
+          mandatory: true,
+          allow_mandatory: false,
+          allow_delete: false,
+          status: true,
+          placeholder: 'Enter Full Name Here',
+          value: ''
+        },{
+          type: 'email',
+          label: 'Email Address',
+          mandatory: true,
+          allow_mandatory: false,
+          allow_delete: false,
+          status: true,
+          placeholder: 'Enter Email Here',
+          value: ''
+        },
+      ],
+      edit_field: {},
+      edit_field_id: null,
+      dialog_edit_field: false,
+      dialog_preview_email: false,
+      preview_email: {}*/
+
+
+
+      getInitials: function(name){
+        var vm = this;
+        var out = '';
+        if( typeof name === 'undefined' || name === null || name.length <= 1 ) return '';
+        var words = name.split( ' ' );
+        if( words.length > 1 ){
+          words = words.slice(0,2);
+          _.each( words, function(val, index){
+            out += typeof val[0] !== 'undefined' ? val[0] : '';
+          });
+        } else{
+          out = words[0].length > 1 ? words[0].substring(0,2) : words[0];
+        }
+        out.replace(' ', '');
+        return out;
+      },
+      showEmailPreview: function(email){
+        var vm = this;
+        vm.dialog_preview_email = true;
+        vm.preview_email = vm.normalize( vm.form.notifications.emails[email] );
+        vm.preview_email.title = 'Confirmation Email';
+        vm.preview_email.sent_date = moment().format('D MMMM YYYY [at] HH:mm');
+        vm.preview_email.sender = 'Vasile Popa';
+        vm.preview_email.recipient = 'Alexander McQueen';
+      },
+      addField: function(type){
+        var vm = this;
+        var field = {
+          mandatory: false,
+          allow_mandatory: true,
+          allow_delete: true,
+          status: true,
+          label: '',
+          type: type,
+          value: ''
+        };
+
+        switch( type ){
+          case 'text' : {
+            field.label = "New Single Line Text Field";
+            field.placeholder = "Enter Text here";
+          } break;
+          case 'textblock' : {
+            field.label = "New Text Block Field";
+            field.content = "Please add some text here.";
+          } break;
+          case 'date' : {
+            field.label = "New Date Field";
+            field.placeholder = "Enter Text here";
+          } break;
+          case 'textarea' : {
+            field.label = "New Multiline Text Field";
+            field.placeholder = "Enter Text here";
+          } break;
+          case 'checkbox' : {
+            field.label = "New Checkbox Field";
+            field.options = 'Check me',
+            field.default = false;
+          } break;
+          case 'checkboxes' : {
+            field.label = "New Checkboxes List Field";
+            field.options = [ 'Option 1', 'Option 2','Option 3'];
+            field.value = [];
+          } break;
+          case 'radio' : {
+            field.label = "New Radio List Field";
+            field.options = [ 'Option 1', 'Option 2','Option 3'];
+          } break;
+          case 'multiselect' : {
+            field.label = "New Multi Select Field";
+            field.options = [ 'Option 1', 'Option 2','Option 3'];
+            field.placeholder = "Choose Options";
+            field.value = [];
+          } break;
+          case 'select' : {
+            field.label = "New Select Field";
+            field.options = [ 'Option 1', 'Option 2','Option 3'];
+            field.placeholder = "Choose option";
+          } break;
+        }
+        vm.form_questions.push(field);
+      },
+      editField: function(q, id){
+        var vm = this;
+        vm.edit_field = vm.normalize(q);
+        vm.edit_field_id = parseInt( id );
+        vm.dialog_edit_field = true;
+      },
+      removeField: function(){
+        var vm = this;
+        if( _.isUndefined( vm.form_questions[vm.edit_field_id] ) || ! vm.form_questions[vm.edit_field_id].allow_delete ) return;
+        vm.form_questions.splice(vm.edit_field_id,1);
+        vm.dialog_edit_field = false;
+      },
+      saveField: function(){
+        var vm = this;
+        vm.form_questions[vm.edit_field_id] = vm.normalize(vm.edit_field);
+        vm.dialog_edit_field = false;
+      },
+      addOption: function(){
+        var vm = this;
+        vm.edit_field.options.push( 'Option ' + ( vm.edit_field.options.length + 1 ).toString() );
+      },
+      removeOption: function(id){
+        var vm = this;
+        vm.edit_field.options.splice(id,1);
+      },
+      parseMarkdown: function( content ){
+        return marked( content, { sanitize: true } )
+      },
+
+
+      ,
+      previewEmail: function(f, ret){
+        var vm = this;
+        var dummy = {
+          event_name : 'Yoga Class',
+          team_member_name: 'John Doe',
+          event_date: moment().format('MMMM D, YYYY'),
+          event_time: moment().format('hh:mm a'),
+          invitee_full_name: 'Alexander McQueen',
+          event_description: '',
+          location: '',
+          questions_and_answers: ''
+        };
+        _.each(dummy, function(o,i){
+          f = f.replace( new RegExp( '{{'+i+'}}' ), o);
+        });
+        return ret === false ? f : marked(f);
+      }
+
+
+
+      <!--
+      <el-row style="padding-bottom:4rem; padding-top: 3rem;">
+        <el-col :span="14" :offset="5">
+          <h2>Advanced Settings</h2>
+          <el-tabs v-model="default_tab">
+            <el-tab-pane label="Guest Questions" name="first" class="app-wp__additional__form-questions">
+              <el-row :gutter="20" type="flex" align="bottom">
+                <el-col :span="21">
+                  <draggable v-model="form_questions" :options="{ handle: '.fa-ellipsis-v' }">
+                    <div v-for="(question, id) in form_questions"  :data-id="id" :key="id" class="app-wp__additional__form-questions__question" :class="question.status ? '' : 'app-wp__additional__form-questions__question--inactive' ">
+                        <i class="fa far fa-lg fa-ellipsis-v"></i>
+                        <i class="fa far fa-lg fa-edit" v-on:click="editField(question, id)"></i>
+
+                        <label class="app-wp__additional__form-questions__label">{{question.label}} <sup v-if="question.mandatory" class="fa far fa-asterisk" style="color: red; font-size: 60%"></sup></label>
+                        <div v-if="question.type === 'text'">
+                          <el-input v-model="question.value" :placeholder="question.placeholder"></el-input>
+                        </div>
+                        <div v-if="question.type === 'textblock'" v-html="parseMarkdown(question.content)"></div>
+                        <div v-else-if="question.type === 'email'">
+                          <el-input v-model="question.value" :placeholder="question.placeholder"></el-input>
+                        </div>
+                        <div v-else-if="question.type === 'textarea'">
+                          <el-input type="textarea" v-model="question.value" :placeholder="question.placeholder" :rows="3"></el-input>
+                        </div>
+                        <div v-else-if="question.type === 'date'">
+                          <el-date-picker v-model="question.value" type="date" :placeholder="question.placeholder"></el-date-picker>
+                        </div>
+                        <div v-else-if="question.type === 'checkbox'">
+                          <el-checkbox v-model="question.value">{{question.options}}</el-checkbox>
+                        </div>
+                        <div v-else-if="question.type === 'checkboxes'">
+                          <el-checkbox-group v-model="question.value">
+                            <el-checkbox v-for="(option, option_key) in question.options" :key="option_key" :label="option">{{option}}</el-checkbox>
+                          </el-checkbox-group>
+                        </div>
+                        <div v-else-if="question.type === 'radio'">
+                          <el-radio v-model="question.value" v-for="(option, option_key) in question.options" :key="option_key" :label="option">{{option}}</el-radio>
+                        </div>
+                        <div v-else-if="question.type === 'multiselect'">
+                           <el-select v-model="question.value" multiple :placeholder="question.placeholder">
+                             <el-option
+                               v-for="(item, item_id) in question.options"
+                               :key="item_id"
+                               :label="item"
+                               :value="item">
+                             </el-option>
+                           </el-select>
+                        </div>
+                        <div v-else-if="question.type === 'select'">
+                           <el-select v-model="question.value" :placeholder="question.placeholder">
+                             <el-option
+                               v-for="(item, item_id) in question.options"
+                               :key="item_id"
+                               :label="item"
+                               :value="item">
+                             </el-option>
+                           </el-select>
+                        </div>
+
+              			</div>
+                  </draggable>
+                </el-col>
+                <el-col :span="3" class="app-wp__text--right">
+                  <el-button type="success" size="medium" round v-popover:popover_questions><i class="fa far fa-plus fa-2x"></i></el-button>
+                </el-col>
+              </el-row>
+            </el-tab-pane>
+            <el-tab-pane label="Notifications" name="second">
+              <el-collapse style="border-top: none;">
+                <el-collapse-item title="Email Confirmation" name="1">
+                  <template slot="title">
+                    <i class="fa far fa-lg fa-check-circle fa-fw local-appointmentsm--right-05"></i> Confirmation Email
+                  </template>
+                  <div>Operation feedback: enable the users to clearly perceive their operations by style updates and interactive effects;</div>
+                  <div>Visual feedback: reflect current state by updating or rearranging elements of the page.</div>
+                  <el-form label-position="top">
+
+                    <el-form-item label="Subject">
+                      <el-input v-model="form.notifications.emails.confirmation.subject" placeholder="Enter email subject here"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Body">
+                      <el-input type="textarea" :rows="12" v-model="form.notifications.emails.confirmation.body" placeholder="Enter email body here"></el-input>
+                    </el-form-item>
+                  </el-form>
+                  <el-button size="mini" type="text" v-on:click="showEmailPreview('confirmation')">Preview Email</el-button>
+
+                </el-collapse-item>
+                <el-collapse-item title="Cancellation Email" name="2">
+                  <template slot="title">
+                    <i class="fa far fa-lg fa-ban fa-fw local-appointmentsm--right-05"></i> Cancellation Email
+                  </template>
+                  <div>Operation feedback: enable the users to clearly perceive their operations by style updates and interactive effects;</div>
+                  <div>Visual feedback: reflect current state by updating or rearranging elements of the page.</div>
+                </el-collapse-item>
+              </el-collapse>
+            </el-tab-pane>
+            <el-tab-pane label="Payment Settings" name="third">Role</el-tab-pane>
+          </el-tabs>
+        </el-col>
+      </el-row>
+    -->
+
+
+
+    <!--
+    <el-dialog title="Edit Field" :visible.sync="dialog_edit_field" center custom-class="app-wp__modal-edit-availability">
+      <template slot="title">
+        <el-switch v-model="edit_field.status" style="position: absolute; left: 25px;top: 22px;" active-text="Visible" :disabled="!edit_field.allow_delete"></el-switch>
+        <div class="el-dialog__title">Edit Field</div>
+      </template>
+      <div v-if="edit_field">
+        <label class="app-wp__label">Field Label</label>
+        <el-input v-model="edit_field.label" placeholder="Enter field label here"></el-input>
+        <el-switch v-model="edit_field.mandatory" active-text="Mandatory" inactive-text="Optional" :disabled="!edit_field.allow_mandatory" class="local-appointments-pull-right local-appointmentsm--top-1"></el-switch>
+        <label v-if="edit_field.placeholder" class="app-wp__label local-appointmentsm--top-3">Placeholder</label>
+        <el-input v-if="edit_field.placeholder" v-model="edit_field.placeholder" placeholder="Enter field placeholder here"></el-input>
+
+        <div v-if="edit_field.type === 'checkbox'">
+          <label class="app-wp__label local-appointmentsm--top-3">Option Label</label>
+          <el-input v-model="edit_field.options" placeholder="Enter field placeholder here"></el-input>
+          <label class="app-wp__label local-appointmentsm--top-2">Default checked? <el-switch v-model="edit_field.default" active-text="Yes" inactive-text="No" class="local-appointmentsm--left-1"></el-switch></label>
+        </div>
+
+        <div v-if="edit_field.type === 'textblock'">
+          <label class="app-wp__label local-appointmentsm--top-3">Text Block Content</label>
+          <el-input  type="textarea" :rows="4" v-model="edit_field.content" placeholder="Enter field content here"></el-input>
+        </div>
+
+        <div v-if="edit_field.type === 'checkboxes' || edit_field.type === 'radio'">
+          <label class="app-wp__label local-appointmentsm--top-3">Choices</label>
+          <el-row v-for="(option, option_id) in edit_field.options" align="middle" type="flex" class="local-appointmentsm--bottom-05">
+            <el-col :span="22"><el-input v-model="edit_field.options[option_id]" size="medium"></el-input></el-col>
+            <el-col :span="2" class="app-wp__text--right"><i v-if="edit_field.options.length > 1" v-on:click="removeOption(option_id)" class="fa far fa-trash-alt"></i></el-col>
+          </el-row>
+          <el-button type="text" size="small" v-on:click="addOption">+ Add choice</el-button>
+        </div>
+
+        <div v-if="edit_field.type === 'multiselect' || edit_field.type === 'select'">
+          <label class="app-wp__label local-appointmentsm--top-2">Choices</label>
+          <el-row v-for="(option, option_id) in edit_field.options" align="middle" type="flex" class="local-appointmentsm--bottom-05">
+            <el-col :span="22"><el-input v-model="edit_field.options[option_id]" size="medium"></el-input></el-col>
+            <el-col :span="2" class="app-wp__text--right"><i v-if="edit_field.options.length > 1" v-on:click="removeOption(option_id)" class="fa far fa-trash-alt"></i></el-col>
+          </el-row>
+          <el-button type="text" size="small" v-on:click="addOption">+ Add choice</el-button>
+        </div>
+
+
+      </div>
+      <div slot="footer" class="dialog-footer local-appointmentsm--top-2">
+        <el-row>
+          <el-col v-if="edit_field.allow_delete" :span="12" class="app-wp__text--left">
+            <el-button type="danger" v-on:click="removeField()">Delete Field</el-button>
+          </el-col>
+          <el-col v-if="edit_field.allow_delete" :span="12" class="app-wp__text--right">
+            <el-button type="primary" v-on:click="saveField()">Save Field</el-button>
+          </el-col>
+          <el-col v-else :span="24"><el-button type="primary" v-on:click="saveField()">Save Field</el-button></el-col>
+        </el-row>
+      </div>
+    </el-dialog>
+
+    <el-dialog :visible.sync="dialog_preview_email" v-if="_.size(preview_email) > 0" center custom-class="app-wp__modal-edit-availability">
+
+      <template slot="title">
+        <div class="el-dialog__title">Preview: {{preview_email.title}}</div>
+      </template>
+      <div class="app-wp__preview-email">
+        <el-row align="middle" type="flex"  :gutter="20">
+          <el-col :span="21">
+            <h4>{{preview_email.sender}} <small class="local-appointments-pull-right">{{preview_email.sent_date}}</small></h4>
+            <div v-html="previewEmail(preview_email.subject)" class="app-wp__preview-email__subject"></div>
+            To: {{preview_email.recipient}}
+          </el-col>
+          <el-col :span="3" class="app-wp__text--right"><div class="app-wp__preview-email__avatar" v-text="getInitials(preview_email.sender)"></div></el-col>
+        </el-row>
+
+        <div v-html="previewEmail(preview_email.body)"></div>
+      </div>
+
+    </el-dialog>
+-->
+
+
+
+<el-popover ref="popover_questions" placement="top" width="600" trigger="hover">
+  <el-row :gutter="20" class="local-appointmentsm--bottom-1">
+    <el-col :span="8"><el-button type="info" class="el-button--block el-button--left" v-on:click="addField('text')"><i class="fa far fa-text-width"></i> Single Line Text</el-button></el-col>
+    <el-col :span="8"><el-button type="info" class="el-button--block el-button--left" v-on:click="addField('textarea')"><i class="fa far fa-paragraph"></i> Multiline Text</el-button></el-col>
+    <el-col :span="8"><el-button type="info" class="el-button--block el-button--left" v-on:click="addField('date')"><i class="fa far fa-calendar-alt"></i> Date</el-button></el-col>
+  </el-row>
+  <el-row :gutter="20" class="local-appointmentsm--bottom-1">
+    <el-col :span="8"><el-button type="info" class="el-button--block el-button--left" v-on:click="addField('checkbox')"><i class="fa far fa-check-square"></i> Single Checkbox</el-button></el-col>
+    <el-col :span="8"><el-button type="info" class="el-button--block el-button--left" v-on:click="addField('checkboxes')"><i class="fa far fa-list"></i> Checkbox List</el-button></el-col>
+    <el-col :span="8"><el-button type="info" class="el-button--block el-button--left" v-on:click="addField('radio')"><i class="fa far fa-dot-circle"></i> Radio List</el-button></el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="8"><el-button type="info" class="el-button--block el-button--left" v-on:click="addField('multiselect')"><i class="fa far fa-square"></i> Multi Select</el-button></el-col>
+    <el-col :span="8"><el-button type="info" class="el-button--block el-button--left" v-on:click="addField('select')"><i class="fa far fa-angle-down"></i> Single Select</el-button></el-col>
+    <el-col :span="8"><el-button type="info" class="el-button--block el-button--left" v-on:click="addField('textblock')"><i class="fa far fa-align-justify"></i> Text Block</el-button></el-col>
+  </el-row>
+</el-popover>

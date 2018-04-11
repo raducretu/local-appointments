@@ -1,0 +1,1 @@
+Vue.component("local-appointmentsnavigation",{template:"#local-appointmentstemplate__routes-global__navigation"});

@@ -1,0 +1,575 @@
+/* Local Appointments Services Shortcode */
+.loc-app{
+  &-sc{
+    &-services{
+      /*
+      &[data-preview="true"]:hover{
+        position: relative;
+
+        &::before{
+          content: '';
+          display: block;
+          border-radius: 2px;
+          border: 2px solid green;
+          opacity: 0.3;
+          top: -2vh;
+          right: -2vh;
+          bottom: -2vh;
+          left: -2vh;
+          position: absolute;
+        }
+      }
+      */
+
+      &__services-list{
+        display: flex;
+        margin: -2rem -1rem 0;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+
+        & .loc-app-sc-services__service{
+          @media(min-width: 992px){
+            flex-basis: 100%;
+          }
+        }
+
+        &.columns--2 .loc-app-sc-services__service{
+          @media(min-width: 992px){
+            flex-basis: 50%;
+          }
+        }
+
+        &.columns--3 .loc-app-sc-services__service{
+          @media(min-width: 992px){
+            flex-basis: 33.33%;
+          }
+        }
+        &.columns--4 .loc-app-sc-services__service{
+          @media(min-width: 992px){
+            flex-basis: 25%;
+          }
+        }
+      }
+      &__service{
+        flex-basis: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+        padding: 0 1em;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        justify-content: center;
+        margin-top: 2em;
+
+        &:hover{
+          z-index: 5;
+        }
+
+
+        &__duration{
+          display: inline-block;
+          padding: .1vh 1.5vh;
+          position: relative;
+          margin-right: .75vh;
+          font-size: .8em;
+
+          &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: block;
+            border: 1px solid currentColor;
+            opacity: 0.1;
+            border-radius: 2px;
+          }
+        }
+
+        &__content{
+          box-shadow: 0 5px 3rem -1rem rgba(0, 0, 0, 0.1), 0 5px 1rem rgba(0, 0, 0, 0.05);
+          transition: all 120ms ease;
+          border-radius: 5px;
+          padding: 16px 60px 60px 60px;
+          flex-grow: 1;
+          background-color: white;
+          cursor: pointer;
+          position: relative;
+          box-sizing: border-box;
+
+          &::before{
+            content: '';
+            display: block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-style: solid;
+            border-width: 2px;
+            border-color: inherit;
+            border-radius: 100px;
+            left: 20px;
+            top: 20px;
+            box-sizing: border-box;
+          }
+
+          p{
+            margin: 0 0 2vh 0;
+            opacity: 0.7;
+          }
+        }
+
+        &:hover &__content{
+          box-shadow: 0 .5rem 1.5rem rgba(0,0,0,0.1), 0 3rem 3rem -1rem rgba(0,0,0,0.1);
+          transform: translateY(-5%);
+        }
+
+        h3{
+          margin-top: 0;
+          margin-bottom: 10px;
+          font-size: 22px;
+          line-height: 1.2;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+
+
+/* Local Appointments Services Days Shortcode */
+.loc-app{
+  &-sc{
+    &-services{
+      &__days{
+        &-header{
+          margin-bottom: 2rem;
+          display: flex;
+          align-items: center;
+
+          > div{
+            flex-basis: 25%;
+            flex-grow: 1;
+          }
+
+          &:nth-child(2){
+            flex-grow: 2;
+            text-align: center;
+          }
+
+          > div:last-child{
+            text-align: right;
+            font-size: small;
+          }
+
+          h3{
+            padding: 0;
+            margin: 0;
+            font-size: 160%;
+          }
+          .fa{
+            margin-right: 1vh;
+          }
+        }
+        &-filters{
+          width: 100%;
+          position: relative;
+          padding: 1em 0 2em;
+          font-size: 12px;
+          margin-bottom: 4vh;
+          margin-top: -3vh;
+          opacity: 0.8;
+          text-align: center;
+
+          &::before{
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            opacity: 0.12;
+            border-bottom: 1px solid;
+            z-index: -1;
+          }
+
+          &__days{
+
+          }
+          &__hours{
+            display: flex;
+            justify-content: center;
+            margin-top: 1em;
+          }
+
+          &__filter{
+            display: inline-block;
+            padding: 0;
+            margin-bottom: 0;
+            margin-top: 0;
+
+            &--day{
+
+            }
+
+            &--day + &--day {
+              margin-left: 1em;
+            }
+
+            input[type="radio"]{
+              margin-right: .5vh;
+            }
+
+            &--hour{
+              display: flex;
+              align-items: center;
+
+              select:not([size]):not([multiple]){
+                margin-left: 1em;
+                font-size: 12px;
+                padding: .6em 2em .6em 1em;
+                height: auto;
+                border-radius: 2px;
+              }
+
+
+              & + &{
+                margin-left: 1em;
+              }
+            }
+          }
+        }
+      }
+      &__month{
+        flex-basis: 95%;
+        flex-shrink: 0;
+        flex-grow: 1;
+        padding: 1vh 0;
+        margin-bottom: 2vh;
+        overflow: hidden;
+        text-align: center;
+        box-sizing: border-box;
+
+        h4{
+          font-size: 120%;
+          opacity: 0.3;
+          margin: 0;
+          padding: 0;
+          display: inline-block;
+          position: relative;
+          box-sizing: border-box;
+
+          &::before,
+          &::after{
+            content: '';
+            display: inline-block;
+            border-bottom: 1px solid rgba(0,0,0,0.2);
+            position: absolute;
+            width: 100rem;
+          }
+
+          &::after{
+            top: 50%;
+            margin-left: 1rem;
+          }
+
+          &::before{
+            right: 100%;
+            top: 50%;
+            margin-right: 1rem;
+          }
+        }
+      }
+
+      &__days-list{
+        display: flex;
+        margin: 0 -1rem;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        justify-content: center;
+
+        & .loc-app-sc-services__day{
+          flex-basis: 50%;
+
+          @media(min-width: 992px){
+            flex-basis: 100%;
+          }
+        }
+
+        &.columns--2 .loc-app-sc-services__day{
+          @media(min-width: 992px){
+            flex-basis: 50%;
+          }
+        }
+
+        &.columns--3 .loc-app-sc-services__day{
+          @media(min-width: 992px){
+            flex-basis: 33.33%;
+          }
+        }
+        &.columns--4 .loc-app-sc-services__day{
+          @media(min-width: 992px){
+            flex-basis: 25%;
+          }
+        }
+        &.columns--5 .loc-app-sc-services__day{
+          @media(min-width: 992px){
+            flex-basis: 20%;
+          }
+        }
+
+      }
+
+      &__day{
+        padding: 0 .5rem;
+        margin-bottom: 1rem;
+
+        box-sizing: border-box;
+        cursor: pointer;
+
+        .fa-circle{
+          color: #33CB70;
+        }
+
+        &--unavailable{
+          color: #D1D6DD;
+          opacity: 0.7;
+
+          .fa-circle,
+          .local-appointmentsshortcode-services__day-name{
+            color: #D1D6DD;
+          }
+        }
+
+        &-name{
+          color: #000;
+          font-weight: 500;
+        }
+        &-number{
+          font-size: 120%;
+          font-weight: 600;
+          float: right;
+        }
+
+        &__content{
+          box-shadow: .15rem .15rem 1rem -.25rem rgba(0,0,0,0.2);
+          border-radius: 5px;
+          padding: 1rem;
+          transition: all 120ms ease;
+        }
+
+        &:hover &__content{
+          box-shadow: 0 .5rem 2rem -.5rem rgba(0,0,0,0.2);
+          transform: scale(1.05) translateY(-5%);
+        }
+      }
+
+      &__days-footer{
+        margin-top: 3rem;
+        color: rgba(0,0,0,0.4);
+        text-align: center;
+
+
+        a{
+          font-size: 110%;
+          display: inline-block;
+          padding: 1rem 2rem;
+          border-radius: 2px;
+          background-color: $color_light_gray;
+          text-decoration: none;
+          color: #000;
+          font-weight: 500;
+        }
+      }
+
+    }
+  }
+}
+
+
+
+
+
+/* Local Appointments Services Days Shortcode */
+.loc-app{
+  &-sc{
+    &-services{
+      &__times{
+        &-header{
+          margin-bottom: 2rem;
+          display: flex;
+          align-items: center;
+
+          > div{
+            flex-basis: 25%;
+            flex-grow: 1;
+          }
+
+          &:nth-child(2){
+            flex-grow: 2;
+            text-align: center;
+          }
+
+          > div:last-child{
+            text-align: right;
+            font-size: small;
+          }
+
+          h3{
+            padding: 0;
+            margin: 0;
+            font-size: 160%;
+            small{
+              display: block;
+              text-align: center;
+              font-weight: bold;
+              font-size: 75%;
+            }
+          }
+          .fa{
+            margin-right: 1vh;
+          }
+        }
+      }
+      &__times-list{
+        display: flex;
+        margin: 0 -1rem;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        justify-content: center;
+      }
+
+      &__time{
+        padding: 0 .5rem;
+        margin-bottom: 1rem;
+        flex-basis: 16.66%;
+        box-sizing: border-box;
+        position: relative;
+        cursor: pointer;
+
+        .fa-circle{
+          color: #33CB70;
+        }
+
+        &--unavailable{
+          color: #D1D6DD;
+          opacity: 0.7;
+
+          .fa-circle,
+          .local-appointmentsshortcode-services__day-name{
+            color: #D1D6DD;
+          }
+        }
+
+        &--not-confirm{
+          opacity: 0.35;
+          filter: blur(1px);
+        }
+
+        &--confirm{
+          .loc-app-sc-services__time__content{
+            box-shadow: .15rem .15rem 2rem -.25rem rgba(0,0,0,0.3);
+            transform: scale(1.05) translateY(-5%);
+          }
+          &:hover .loc-app-sc-services__time__content{
+            box-shadow: .15rem .15rem 2rem -.25rem rgba(0,0,0,0.3) !important;
+          }
+        }
+
+        &-name{
+          color: #000;
+          font-weight: 500;
+          font-size: 110%;
+          float: right;
+        }
+
+        &__content{
+          box-shadow: .15rem .15rem 1rem -.25rem rgba(0,0,0,0.2);
+          border-radius: 5px;
+          padding: 1rem;
+          transition: all 120ms ease;
+        }
+
+        &:hover &__content{
+          box-shadow: 0 .5rem 2rem -.5rem rgba(0,0,0,0.2);
+          transform: scale(1.05) translateY(-5%);
+        }
+        &__confirm{
+          left: .5rem;
+          right: .5rem;
+          top: 100%;
+          background-color:#fff;
+          position: absolute;
+          margin: 1rem 0 0;
+          border-radius: 5px;
+          display: block;
+          box-sizing: border-box;
+          z-index: 5;
+
+
+
+          &-button{
+            display: block;
+            background-color: red;
+            color: white;
+            border-radius: 3px;
+            text-align: center;
+            box-sizing: border-box;
+            padding: .75rem 0;
+            text-decoration: none;
+            font-weight: 600;
+            font-weight: 500;
+
+            &:hover{
+              color: white;
+              text-decoration: none;
+            }
+
+            & + &{
+              margin-top: .75rem;
+              background-color: blue;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+
+
+/* Local Appointments Services Days Shortcode */
+.loc-app{
+  &-sc{
+    &-services{
+      &__details{
+        display: flex;
+        width: 100%;
+
+        &__summary{
+          flex-basis: 50%;
+
+          .fa{
+            margin-right: 1vh;
+          }
+
+          h3{
+            small{
+              display: block;
+              margin-top: .5vh;
+              opacity: 0.5;
+            }
+          }
+        }
+        &__content{
+          flex-basis: 50%;
+          margin-left: 4rem;
+        }
+      }
+    }
+  }
+}

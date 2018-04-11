@@ -1,0 +1,170 @@
+#local-appointments .el-menu{
+  &-item{
+    padding: 0;
+    &:not(:nth-last-child(3)){
+
+      margin-right: 2rem;
+    }
+  }
+}
+
+
+
+
+.el-button{
+  &--primary{
+    border-color: $color_blue;
+    color: white;
+    background-color: $color_blue;
+
+    &:hover{
+      background-color: $color_blue;
+      color: white;
+      border-color: $color_blue;
+    }
+
+    &.is-plain{
+      border-color: rgba( $color_blue, .4 );
+      color: $color_blue;
+      background-color: rgba( $color_blue, .1 );
+
+      &:hover{
+        background-color: $color_blue;
+        color: white;
+        border-color: $color_blue;
+      }
+    }
+  }
+  &--text{
+    color: $color_blue;
+  }
+}
+
+
+.el-card{
+  &:hover{
+    border-color: $color_light_gray;
+  }
+  &__body{
+    padding: 1rem 1rem 1rem;
+  }
+  &__header{
+    padding: 1rem 1rem 0;
+    border-bottom: none;
+
+    .fa-lg{
+      //margin-left: -4px;
+    }
+    i + a{
+      font-size: 120%;
+      text-decoration: none;
+      color: $color_dark_gray;
+      font-weight: 500;
+    }
+  }
+}
+
+
+.el-pagination{
+  padding: 0;
+}
+
+
+.el-switch{
+  &.is-checked .el-switch__core{
+    background-color: $color_blue;
+    border-color: $color_blue;
+  }
+  &__label.is-active{
+    color:  $color_blue;
+  }
+}
+
+
+.v-modal{
+  z-index: 9999999 !important;
+  background-color: white;
+  opacity: 0.92;
+}
+.el-dialog{
+  box-shadow: 1rem 1rem 4rem -0.5rem rgba(0,0,0,0.2);
+
+  &__wrapper{
+    z-index: 999999999 !important;
+  }
+  &__header{
+    padding: 2rem 2rem 1rem;
+  }
+  &__content,
+  &__body{
+    padding: 0rem 2rem 2rem;
+  }
+  &__footer{
+    padding: 1rem 2rem 2rem;
+  }
+  &--large{
+    width: 100%;
+    max-width: 80%;
+
+    @include breakpoint(desktop) {
+      max-width: 40%;
+    }
+
+    @include breakpoint(large-desktop) {
+      max-width: 30%;
+    }
+  }
+}
+
+
+
+
+.el-form{
+  &-item{
+    margin-bottom: 2rem;
+    &__label{
+        font-weight: 500;
+    }
+    &__description{
+      opacity: 0.65;
+      margin-top: -0.25rem;
+    }
+  }
+}
+
+
+
+
+.el-radio-button{
+  &__orig-radio:checked + &__inner{
+    background-color: $color_blue;
+    border-color: $color_blue;
+    box-shadow: -1px 0 0 0 $color_blue
+  }
+  &__inner:hover{
+    color: $color_blue;
+  }
+}
+
+
+
+.el-slider{
+  &__button{
+    border: 2px solid $color_blue;
+  }
+  &__bar{
+    background-color: $color_blue;
+  }
+}
+
+
+
+.el-dropdown-menu{
+  &--small &__item{
+    padding-right: 2rem;
+  }
+  &__item:not(.is-disabled):hover{
+    background-color: rgba( $color_blue, .05 );
+    color: $color_blue;
+  }
+}
